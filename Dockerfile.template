@@ -24,7 +24,7 @@ WORKDIR usr/src/app
 COPY ./app ./
 
 # Clone opnecd repo
-RUN git clone https://github.com/resin-io-modules/FT2232H-56Q-openocd.git && \
+RUN git clone -depth 1 https://github.com/resin-io-modules/FT2232H-56Q-openocd.git && \
   cd FT2232H-56Q-openocd && chmod -R +x ./* && autoreconf -f -i && ./configure && make && \
   make install
 
