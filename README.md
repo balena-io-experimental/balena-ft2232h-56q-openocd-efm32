@@ -6,4 +6,4 @@ a resin application that allows to flash an efm32 microcontroller via a FTDI FT2
 - Setup your resin.io account and push to your application following [this guide](https://docs.resin.io/raspberrypi3/nodejs/getting-started/#account-setup)
 - Open 2 appication container terminals from the dashboard
   - in the first shell, type `openocd -f interface/ftdi/2232h-cp.cfg -f target/efm32.cfg`
-  - in the second shell, right afterwards, type `telnet localhost 4444` -> `reset` -> `program ./firmware/soc-empty.bin`
+  - in the second shell, right afterwards, type `telnet localhost 4444` -> `reset` -> `program /usr/src/app/firmware/soc-empty.bin`
