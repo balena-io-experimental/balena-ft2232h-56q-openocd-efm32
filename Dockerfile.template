@@ -2,7 +2,6 @@ FROM resin/%%RESIN_MACHINE_NAME%%-buildpack-deps
 
 # install required packages
 RUN apt-get update && apt-get install -yq --no-install-recommends \
-    ftdi-eeprom \
     git \
     build-essential \
     libtool \
@@ -11,7 +10,6 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     automake \
     texinfo \
     libusb-1.0 \
-    libftdi-dev \
     screen \
     telnet \
     make && \
@@ -20,10 +18,10 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
 # define our working directory in the container
 WORKDIR usr/src/app
 
-# Move app to filesystem
+# move app to filesystem
 COPY ./app ./
 
-# Clone opnecd repo
+# clone openocd repo, configure for balena fin and build
 RUN git clone git://git.code.sf.net/p/openocd/code openocd-code && \
   cd openocd-code && chmod -R +x bootstrap && ./bootstrap && ./configure --enable-sysfsgpio --enable-bcm2835gpio && make && \
   make install
@@ -31,5 +29,5 @@ RUN git clone git://git.code.sf.net/p/openocd/code openocd-code && \
 # enable systemd init system in the container
 ENV INITSYSTEM on
 
-# Start app
+# start app
 CMD ["bash", "/usr/src/app/start.sh"]
