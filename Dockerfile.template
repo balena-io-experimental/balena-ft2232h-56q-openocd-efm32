@@ -24,8 +24,8 @@ WORKDIR usr/src/app
 COPY ./app ./
 
 # Clone opnecd repo
-RUN git clone --depth 1 git://git.code.sf.net/p/openocd/code openocd-code && \
-  cd openocd && chmod -R +x bootstrap && ./bootstrap && ./configure --enable-sysfsgpio --enable-bcm2835gpio && make && \
+RUN git clone git://git.code.sf.net/p/openocd/code openocd-code && \
+  cd openocd-code && chmod -R +x bootstrap && ./bootstrap && ./configure --enable-sysfsgpio --enable-bcm2835gpio && make && \
   make install
 
 # enable systemd init system in the container
